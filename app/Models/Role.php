@@ -9,7 +9,6 @@ class Role extends Model
 {
     protected $fillable = ['name', 'description'];
 
-    // Relasi: Satu peran dimiliki banyak pengguna
     public function users(): HasMany
     {
         return $this->hasMany(User::class);

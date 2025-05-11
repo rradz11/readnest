@@ -2,23 +2,32 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
-    protected $fillable = ['name', 'email', 'password', 'role_id'];
+    protected $fillable = ['username', 'email', 'password', 'role_id'];
 
-    // Relasi: Pengguna memiliki satu peran
-    public function role(): BelongsTo
+    protected $hidden = ['password', 'remember_token'];
+
+    public function role()
     {
         return $this->belongsTo(Role::class);
     }
 
-    // Relasi: Pengguna bisa menjadi satu penulis
-    public function author(): HasOne
+    public function author()
     {
         return $this->hasOne(Author::class);
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

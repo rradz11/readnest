@@ -10,13 +10,11 @@ class Author extends Model
 {
     protected $fillable = ['user_id', 'bio', 'profile_picture'];
 
-    // Relasi: Penulis terkait satu pengguna
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    // Relasi: Penulis memiliki banyak artikel
     public function articles(): HasMany
     {
         return $this->hasMany(Article::class);
