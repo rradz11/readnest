@@ -2,20 +2,34 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Article extends Model
 {
-    protected $fillable = ['title', 'content', 'author_id', 'category_id', 'status', 'published_at'];
+    use HasFactory;
 
-    public function author(): BelongsTo
+    protected $fillable = [
+        'title',
+        'content',
+        'author_id',
+        'category_id',
+        'status',
+        'published_at',
+    ];
+
+    public function author()
     {
         return $this->belongsTo(Author::class);
     }
 
-    public function category(): BelongsTo
+    public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }
