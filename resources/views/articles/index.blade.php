@@ -16,14 +16,17 @@
 <body>
   <div class="bg-white py-24 sm:py-32">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="mx-auto max-w-2xl lg:mx-0">
+      <div class="mx-auto max-w-2xl lg:mx-0 flex items-center justify-between">
         <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-          Mau baca apa hari ini {{ auth()->check() ? auth()->user()->username : '' }}?
+          Mau baca apa hari ini, <span id="username"></span>?
         </h2>
-        <p class="mt-2 text-lg leading-8 text-gray-600">
-          Jelajahi ide segar, sudut pandang bermakna, dan kisah yang menggerakkan masa depan.
-        </p>
+        <button id="logout-btn" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition">
+          Logout
+        </button>
       </div>
+      <p class="mt-2 text-lg leading-8 text-gray-600">
+        Jelajahi ide segar, sudut pandang bermakna, dan kisah yang menggerakkan masa depan.
+      </p>
 
       <div
         class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
@@ -50,7 +53,6 @@
       </div>
     </div>
   </div>
-
 
   <script>
     const token = localStorage.getItem('token');
@@ -84,6 +86,27 @@
                 `).join('');
       } catch (error) {
         document.getElementById('error-message').textContent = error.message;
+      }
+    }
+
+    async function fetchUsername() {
+      const token = localStorage.getItem('token');
+      if (!token) return;
+
+      try {
+        const response = await fetch('/api/auth/me', {
+          headers: {
+            'Authorization': 'Bearer ' + token,
+            'Accept': 'application/json',
+          },
+        });
+        if (!response.ok) throw new Error('Gagal mengambil data user');
+
+        const data = await response.json();
+        const username = data.user.username;
+        document.getElementById('username').textContent = username;
+      } catch (error) {
+        console.error(error);
       }
     }
 
@@ -131,17 +154,24 @@
 
     document.getElementById('logout-btn').addEventListener('click', async () => {
       try {
-        await fetch('/api/auth/logout', {
+        const token = localStorage.getItem('token');
+        if (!token) throw new Error('Token tidak ditemukan');
+
+        const response = await fetch('/api/auth/logout', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,
             'Accept': 'application/json',
           },
         });
+
+        if (!response.ok) throw new Error('Gagal logout');
+
         localStorage.removeItem('token');
         window.location.href = '/login';
       } catch (error) {
-        document.getElementById('error-message').textContent = 'Gagal logout';
+        alert('Gagal logout, coba lagi.');
+        console.error(error);
       }
     });
 
@@ -154,6 +184,7 @@
 
     // Panggil fungsi saat halaman dimuat
     fetchUser().then(fetchArticles);
+    fetchUsername();
   </script>
 </body>
 
