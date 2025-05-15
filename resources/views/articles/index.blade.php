@@ -3,7 +3,14 @@
 
 <head>
   <title>Daftar Artikel</title>
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
   @vite(['resources/css/app.css', 'resources/js/app.js'])
+  <style>
+    body {
+      font-family: 'Instrument Sans', sans-serif;
+    }
+  </style>
 </head>
 
 <body>
@@ -11,7 +18,7 @@
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
       <div class="mx-auto max-w-2xl lg:mx-0">
         <h2 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-          Mau baca apa hari ini {{ auth()->check() ? ', ' . auth()->user()->username : '' }}?
+          Mau baca apa hari ini {{ auth()->check() ? auth()->user()->username : '' }}?
         </h2>
         <p class="mt-2 text-lg leading-8 text-gray-600">
           Jelajahi ide segar, sudut pandang bermakna, dan kisah yang menggerakkan masa depan.

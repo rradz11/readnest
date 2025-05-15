@@ -5,13 +5,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Daftar Akun</title>
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
   @vite(['resources/css/app.css', 'resources/js/app.js'])
+  <style>
+    body {
+      font-family: 'Instrument Sans', sans-serif;
+    }
+  </style>
 </head>
 
 <body class="min-h-screen flex items-center justify-center">
   <div class="bg-white p-8 rounded-2xl w-full max-w-md space-y-6">
     <div class="text-center">
-      <h2 class="text-3xl font-extrabold text-indigo-600">Buat Akun</h2>
+      <h2 class="text-3xl font-extrabold">Buat Akun</h2>
       <p class="mt-2 text-sm text-gray-500">Daftar dan mulai menjelajahi</p>
     </div>
 
@@ -41,7 +48,7 @@
       </div>
 
       <button type="submit"
-        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg shadow-sm transition duration-200">
+        class="w-full bg-black text-white font-semibold py-2 rounded-lg shadow-sm transition duration-200">
         Daftar
       </button>
     </form>

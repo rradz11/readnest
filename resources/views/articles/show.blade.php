@@ -5,20 +5,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Artikel - {{ $article->title }}</title>
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
   @vite(['resources/css/app.css', 'resources/js/app.js'])
+  <style>
+    body {
+      font-family: 'Instrument Sans', sans-serif;
+    }
+  </style>
 </head>
 
 <body class="min-h-screen font-sans antialiased">
   <div class="container mx-auto max-w-4xl px-6 py-10">
-
-    <div class="flex justify-start items-center mb-6 pl-8">
-      <div class="flex items-center gap-3">
-        <a href="{{ route('articles.index') }}"
-          class="inline-flex items-center px-4 py-2 bg-gray-700 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition">
-          ← Kembali
-        </a>
-      </div>
-    </div>
 
     <article class=" rounded-2xl p-8 mb-4">
       <header class="mb-6">
@@ -47,7 +45,8 @@
         <textarea id="comment-content"
           class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           rows="3" placeholder="Tulis komentar..."></textarea>
-        <button type="submit" class="mt-3 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+        <button type="submit"
+          class="text-sm mt-3 px-4 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition">
           Kirim Komentar
         </button>
       </form>
@@ -136,7 +135,7 @@
           <div class="py-4 border-b border-gray-200">
             <p class="text-gray-700 text-base">${comment.content}</p>
             <p class="text-xs text-gray-500 mt-1">
-                — ${comment.user?.username || 'Anonim'} • ${formatDate(comment.created_at)}
+                 ${comment.user?.username || 'Anonim'} - ${formatDate(comment.created_at)}
             </p>
           </div>
         `).join('') :

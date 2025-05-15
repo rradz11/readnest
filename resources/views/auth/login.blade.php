@@ -5,14 +5,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Login</title>
+  <link rel="preconnect" href="https://fonts.bunny.net" />
+  <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
   @vite(['resources/css/app.css', 'resources/js/app.js'])
+  <style>
+    body {
+      font-family: 'Instrument Sans', sans-serif;
+    }
+  </style>
 </head>
 
 <body class="min-h-screen flex items-center justify-center bg-gray-100">
 
   <div class="w-full max-w-md bg-white rounded-2xl p-8 space-y-6 shadow-lg">
     <div class="text-center">
-      <h2 class="text-3xl font-extrabold text-indigo-600">Selamat Datang</h2>
+      <h2 class="text-3xl font-extrabold">Selamat Datang</h2>
       <p class="mt-2 text-sm text-gray-500">Silahkan masuk untuk melanjutkan</p>
     </div>
 
@@ -31,7 +38,7 @@
       </div>
 
       <button type="submit"
-        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg shadow-sm transition duration-200">
+        class="w-full bg-black text-white font-semibold py-2 rounded-lg shadow-sm transition duration-200">
         Masuk
       </button>
     </form>
