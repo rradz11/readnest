@@ -171,8 +171,8 @@
           throw new Error(result.message || 'Gagal mengirim komentar');
         }
 
-        document.getElementById('comment-content').value = ''; // kosongkan textarea
-        fetchComments(); // refresh daftar komentar
+        document.getElementById('comment-content').value = '';
+        fetchComments();
       } catch (error) {
         document.getElementById('error-message').textContent = error.message;
       }
